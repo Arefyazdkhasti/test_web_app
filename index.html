@@ -213,13 +213,13 @@
 
     function showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled) {
       //add loading screen
-      document.getElementById('splash-screen').style.display = 'block';
+      //document.getElementById('splash-screen').style.display = 'block';
 
       setTimeout(() => {
         if (isIos && isSafari) {
           if (isPwaInstalled) {
             // Remove splash
-            document.getElementById('splash-screen').style.display = 'none';
+            //document.getElementById('splash-screen').style.display = 'none';
                   
             // Download main.dart.js
             _flutter.loader.loadEntrypoint({
