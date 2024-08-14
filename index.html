@@ -218,6 +218,9 @@
       setTimeout(() => {
         if (isIos && isSafari) {
           if (isPwaInstalled) {
+            // Remove splash
+            document.getElementById('splash-screen').style.display = 'none';
+                  
             // Download main.dart.js
             _flutter.loader.loadEntrypoint({
               serviceWorker: {
@@ -225,9 +228,6 @@
               },
               onEntrypointLoaded: function (engineInitializer) {
                 engineInitializer.initializeEngine().then(function (appRunner) {
-                  // Remove splash
-                  document.getElementById('splash-screen').style.display = 'none';
-                  
                   appRunner.runApp();
                 });
               }
