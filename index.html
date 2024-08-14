@@ -1,256 +1,59 @@
 <!DOCTYPE html>
-<html lang="fa">
-
+<html>
 <head>
-  <base href="/">
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta content="A new Flutter project." name="description">
+  <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
-  <meta content="yes" name="apple-mobile-web-app-capable">
-  <meta content="black" name="apple-mobile-web-app-status-bar-style">
-  <meta content="pateh_app" name="apple-mobile-web-app-title">
-  <link href="icons/Icon-192.png" rel="apple-touch-icon">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="pateh_app">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link href="favicon.png" rel="icon" type="image/png" />
+  <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>پته</title>
-  <link href="manifest.json" rel="manifest">
+  <title>pateh_app</title>
+  <link rel="manifest" href="manifest.json">
 
   <script>
-    const serviceWorkerVersion = "3350275999";
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = null;
   </script>
-  <script defer src="flutter.js"></script>
-
-  <style>
-    @font-face {
-      font-family: 'Estedad';
-      src: url('font/Estedad-Medium.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-
-    body {
-      margin: 0;
-      font-family: 'Estedad';
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .unsupported-message {
-      width: 100%;
-      font-family: 'Estedad';
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .container {
-      text-align: center;
-      width: 90%;
-      max-width: 75%;
-      margin: 0 auto;
-    }
-
-    .header-text {
-      font-size: 48px;
-      font-family: 'Estedad';
-      margin-bottom: 20px;
-    }
-
-    .logo-container {
-      background-color: #1c1c1c;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .logo {
-      width: 55%;
-      margin-bottom: 20px;
-    }
-
-    .sub-text {
-      font-size: 36px;
-      margin-top: 0;
-      margin-bottom: 16;
-      font-family: 'Estedad';
-      direction: rtl;
-    }
-
-    .instruction_text {
-      font-size: 32px;
-      margin-top: 0;
-      margin-bottom: 16;
-      font-family: 'Estedad';
-      direction: rtl;
-    }
-  </style>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
 </head>
-
 <body>
-
-
-  <!--Splash => show splash mode-->
-  <div class="unsupported-message" dir="rtl" id="splash-screen"
-    style="display: block; width: 100%; text-align: center; color: 0xFF25C37C;">
-    <p class="header-text" style="margin: 20px;">در حال دریافت اطلاعات ...</p>
-  </div>
-
-  <!-- desktop => show unsuportted mode -->
-  <div class="unsupported-message" id="unsupported-desktop-message"
-    style="display: none; width: 60%; text-align: center;">
-    <div class="container">
-      <div class="header-text" style="font-size: 24px">اپلیکیشن پته iOS نصب نسخه</div>
-      <div class="logo-container">
-        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg"
-          style="width: 10% " type="image/svg+xml" />
-        <p class="sub-text" style="margin: 20px; font-size: 24px;">جهت نصب نسخه وب اپلیکیشن پته
-          با
-          تلفن همراه
-          خود وارد شوید</p>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- android => show available markets -->
-  <div class="unsupported-message" id="unsupported-android-message" style="display: none; width: 100%;">
-    <div class="container">
-      <div class="header-text">نصب نسخه اندروید اپلیکیشن پته</div>
-      <div class="logo-container" style="margin: 20px;">
-        <embed pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg" style="width: 60%"
-          type="image/svg+xml" />
-        <p class="sub-text" style="margin: 50px;"> جهت نصب اپلیکیشن پته برای اندروید از طریق
-          یکی از مارکت های موجود
-          اقدام کنید</p>
-        <div>
-          <a href="https://play.google.com/store/apps/details?id=com.pateh.app">
-            <img alt="Google Play Logo" class="logo" src="icons/google-play.png">
-          </a>
-        </div>
-        <div>
-          <a href="https://myket.ir/app/com.pateh.app">
-            <img alt="Mayket Logo" class="logo" src="icons/myket.png">
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ios but not safari => show use safari -->
-  <div class="unsupported-message" id="unsupported-non-safari-message"
-    style="display: none; width: 100%; text-align: center;">
-    <div class="container">
-      <div class="header-text">اپلیکیشن پته iOS نصب نسخه</div>
-      <div class="logo-container">
-        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg"
-          style="width: 60% " type="image/svg+xml" />
-        <p class="sub-text" style="margin: 20px;">جهت نصب نسخه IOS پته با مرورگر سافاری وارد
-          شوید</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ios and safari => show add to Home instruction -->
-  <div class="unsupported-message" dir="rtl" id="supported-safari-message" style="display: none;">
-    <div class="container">
-      <div class="header-text">نصب نسخه IOS اپلیکیشن پته</div>
-      <div class="logo-container">
-        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg"
-          style="width: 30% " type="image/svg+xml" />
-        <div class="instruction_text" style="text-align:start">
-          <p>۱- در نوار پایین گوشی دکمه <span style="font-size: 48px;">&#x2191;</span> را کلیک
-            کنید.</p>
-          <p>۲- منوی باز شده را به بالا اسکرول کنید و دکمه <strong>Add to Home Screen</strong>
-            را
-            کلیک کنید.</p>
-          <p>۳- در آخر در بالای صفحه دکمه <strong>Add</strong> را کلیک کنید.</p>
-          <p>۴- در صورتی که سیستم عامل شما iOS است، از مرورگر Safari استفاده کنید.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    window.addEventListener('load', function (ev) {
-      const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
-        navigator.userAgent &&
-        navigator.userAgent.indexOf('CriOS') == -1 &&
-        navigator.userAgent.indexOf('FxiOS') == -1;
-
-      const isIos = (
-        ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(
-          navigator.platform,
-        ) ||
-        (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-      );
-
-      const isAndroid = /android/i.test(navigator.userAgent);
-
-
-      const isPwaInstalled = window.navigator.standalone == true || // iOS PWA Standalone
-        document.referrer.includes('android-app://') || // Android Trusted Web App
-        ["fullscreen", "standalone", "minimal-ui"].some(
-          (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
-        ) // Chrome PWA (supporting fullscreen, standalone, minimal-ui)
-
-      console.log(window.navigator.standalone == true) // true
-      console.log(document.referrer.includes('android-app://')) // true
-      console.log(["fullscreen", "standalone", "minimal-ui"].some(
-        (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
-      )) // true
-
-      console.log('isIos', isIos);
-      console.log('isSafari', isSafari);
-      console.log('isAndroid', isAndroid);
-      console.log('isPwaInstalled', isPwaInstalled);
-
-      //add loading screen
-      document.getElementById('splash-screen').style.display = 'block';
-
-      if (true) {
-        if (true) {
-          // Download main.dart.js
-          _flutter.loader.loadEntrypoint({
-            serviceWorker: {
-              serviceWorkerVersion: serviceWorkerVersion,
-            },
-            onEntrypointLoaded: function (engineInitializer) {
-              engineInitializer.initializeEngine().then(function (appRunner) {
-                appRunner.runApp();
-                // Remove splash
-                document.getElementById('splash-screen').style.display = 'none';
-              });
-            }
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
           });
-        } else {
-          // Remove splash
-          document.getElementById('splash-screen').style.display = 'none';
-          document.getElementById('supported-safari-message').style.display = 'block';
         }
-      } else if (isIos && !isSafari) {
-        // Remove splash
-        document.getElementById('splash-screen').style.display = 'none';
-        document.getElementById('unsupported-non-safari-message').style.display = 'block';
-      } else if (isAndroid) {
-        // Remove splash
-        document.getElementById('splash-screen').style.display = 'none';
-        document.getElementById('unsupported-android-message').style.display = 'block';
-      } else {
-        // Remove splash
-        document.getElementById('splash-screen').style.display = 'none';
-        document.getElementById('unsupported-desktop-message').style.display = 'block';
-      }
+      });
     });
-
   </script>
 </body>
-
 </html>
