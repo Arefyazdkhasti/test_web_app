@@ -103,7 +103,7 @@
 
   <!--Splash => show splash mode-->
   <div class="unsupported-message animate" dir="rtl" id="splash-screen"
-    style="display: block; width: 100%; text-align: center; color: #ffffff;">
+    style="display: block; width: 100%; text-align: center; background-color: #ffffff;">
     <!-- <span class="header-text" style="margin: 20px;">در حال دریافت اطلاعات ...</span> -->
     <embed pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg" style="width: 40%"
       type="image/svg+xml" />
@@ -231,7 +231,7 @@
             onEntrypointLoaded: function (engineInitializer) {
               engineInitializer.initializeEngine().then(function (appRunner) {
                 // Remove splash
-                //setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 500);
+                setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 400);
 
                 appRunner.runApp();
               });
