@@ -180,7 +180,38 @@
 
   <script>
     window.addEventListener('load', function (ev) {
-      function showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled) {
+      const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+        navigator.userAgent &&
+        navigator.userAgent.indexOf('CriOS') == -1 &&
+        navigator.userAgent.indexOf('FxiOS') == -1;
+
+      const isIos = (
+        ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(
+          navigator.platform,
+        ) ||
+        (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+      );
+
+      const isAndroid = /android/i.test(navigator.userAgent);
+
+
+      const isPwaInstalled = window.navigator.standalone == true || // iOS PWA Standalone
+        document.referrer.includes('android-app://') || // Android Trusted Web App
+        ["fullscreen", "standalone", "minimal-ui"].some(
+          (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
+        ) // Chrome PWA (supporting fullscreen, standalone, minimal-ui)
+
+      console.log(window.navigator.standalone == true) // true
+      console.log(document.referrer.includes('android-app://')) // true
+      console.log(["fullscreen", "standalone", "minimal-ui"].some(
+        (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
+      )) // true
+
+      console.log('isIos', isIos);
+      console.log('isSafari', isSafari);
+      console.log('isAndroid', isAndroid);
+      console.log('isPwaInstalled', isPwaInstalled);
+
       //add loading screen
       document.getElementById('splash-screen').style.display = 'block';
 
@@ -217,42 +248,8 @@
         document.getElementById('splash-screen').style.display = 'none';
         document.getElementById('unsupported-desktop-message').style.display = 'block';
       }
-    }
-      
-      const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
-        navigator.userAgent &&
-        navigator.userAgent.indexOf('CriOS') == -1 &&
-        navigator.userAgent.indexOf('FxiOS') == -1;
-
-      const isIos = (
-        ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(
-          navigator.platform,
-        ) ||
-        (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-      );
-
-      const isAndroid = /android/i.test(navigator.userAgent);
-
-
-      const isPwaInstalled = window.navigator.standalone == true || // iOS PWA Standalone
-        document.referrer.includes('android-app://') || // Android Trusted Web App
-        ["fullscreen", "standalone", "minimal-ui"].some(
-          (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
-        ) // Chrome PWA (supporting fullscreen, standalone, minimal-ui)
-
-      console.log(window.navigator.standalone == true) // true
-      console.log(document.referrer.includes('android-app://')) // true
-      console.log(["fullscreen", "standalone", "minimal-ui"].some(
-        (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
-      )) // true
-
-      console.log('isIos', isIos);
-      console.log('isSafari', isSafari);
-      console.log('isAndroid', isAndroid);
-      console.log('isPwaInstalled', isPwaInstalled);
-
-      showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled);
     });
+
   </script>
 </body>
 
