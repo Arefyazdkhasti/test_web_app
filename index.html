@@ -227,7 +227,7 @@
             onEntrypointLoaded: function (engineInitializer) {
               engineInitializer.initializeEngine().then(function (appRunner) {
                 // Remove splash
-                setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 500);
+                //setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 500);
 
                 appRunner.runApp();
               });
