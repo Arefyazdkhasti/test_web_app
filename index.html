@@ -215,8 +215,8 @@
       //add loading screen
       document.getElementById('splash-screen').style.display = 'block';
 
-      if (true) {
-        if (true) {
+      if (isIos && isSafari) {
+        if (isPwaInstalled) {
           // Download main.dart.js
           _flutter.loader.loadEntrypoint({
             serviceWorker: {
