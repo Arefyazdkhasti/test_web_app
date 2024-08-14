@@ -212,8 +212,20 @@
         (displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
       )) // true
 
-
-      showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled);
+// Download main.dart.js
+          _flutter.loader.loadEntrypoint({
+            serviceWorker: {
+              serviceWorkerVersion: serviceWorkerVersion,
+            },
+            onEntrypointLoaded: function (engineInitializer) {
+              engineInitializer.initializeEngine().then(function (appRunner) {
+                appRunner.runApp();
+                // Remove splash
+                document.getElementById('splash-screen').style.display = 'none';
+              });
+            }
+          });
+      //showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled);
     });
 
     function showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled) {
