@@ -225,11 +225,11 @@
               },
               onEntrypointLoaded: function (engineInitializer) {
                 engineInitializer.initializeEngine().then(function (appRunner) {
+                  // Remove splash
+                  document.getElementById('splash-screen').style.display = 'none';
+                  
                   appRunner.runApp();
                 });
-
-                // Remove splash
-                document.getElementById('splash-screen').style.display = 'none';
               }
             });
           } else {
