@@ -2,7 +2,7 @@
 <html lang="fa">
 
 <head>
-  <base href="/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -17,11 +17,11 @@
   <!-- Favicon -->
   <link href="favicon.png" rel="icon" type="image/png" />
 
-  <title>pateh_app</title>
+  <title>پته</title>
   <link href="manifest.json" rel="manifest">
 
   <script>
-    const serviceWorkerVersion = "963529717";
+    const serviceWorkerVersion = null;
   </script>
   <script defer src="flutter.js"></script>
 
@@ -97,19 +97,19 @@
 <body>
 
 
-
-  <!-- Splash => show unsuportted mode -->
+  <!--Splash => show splash mode-->
   <div class="unsupported-message" dir="rtl" id="splash-screen"
     style="display: none; width: 100%; text-align: center; color: 0xFF25C37C;">
     <p class="header-text" style="margin: 20px;">در حال دریافت اطلاعات ...</p>
   </div>
+
   <!-- desktop => show unsuportted mode -->
   <div class="unsupported-message" id="unsupported-desktop-message"
     style="display: none; width: 60%; text-align: center;">
     <div class="container">
       <div class="header-text" style="font-size: 24px">اپلیکیشن پته iOS نصب نسخه</div>
       <div class="logo-container">
-        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="./icons/pateh.svg"
+        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg"
           style="width: 10% " type="image/svg+xml" />
         <p class="sub-text" style="margin: 20px; font-size: 24px;">جهت نصب نسخه وب اپلیکیشن پته
           با
@@ -125,19 +125,19 @@
     <div class="container">
       <div class="header-text">نصب نسخه اندروید اپلیکیشن پته</div>
       <div class="logo-container" style="margin: 20px;">
-        <embed pluginspage="http://www.adobe.com/svg/viewer/install/" src="./icons/pateh.svg" style="width: 60%"
+        <embed pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg" style="width: 60%"
           type="image/svg+xml" />
         <p class="sub-text" style="margin: 50px;"> جهت نصب اپلیکیشن پته برای اندروید از طریق
           یکی از مارکت های موجود
           اقدام کنید</p>
         <div>
           <a href="https://play.google.com/store/apps/details?id=com.pateh.app">
-            <img alt="Google Play Logo" class="logo" src="./icons/google-play.png">
+            <img alt="Google Play Logo" class="logo" src="icons/google-play.png">
           </a>
         </div>
         <div>
           <a href="https://myket.ir/app/com.pateh.app">
-            <img alt="Mayket Logo" class="logo" src="./icons/myket.png">
+            <img alt="Mayket Logo" class="logo" src="icons/myket.png">
           </a>
         </div>
       </div>
@@ -150,7 +150,7 @@
     <div class="container">
       <div class="header-text">اپلیکیشن پته iOS نصب نسخه</div>
       <div class="logo-container">
-        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="./icons/pateh.svg"
+        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg"
           style="width: 60% " type="image/svg+xml" />
         <p class="sub-text" style="margin: 20px;">جهت نصب نسخه IOS پته با مرورگر سافاری وارد
           شوید</p>
@@ -163,7 +163,7 @@
     <div class="container">
       <div class="header-text">نصب نسخه IOS اپلیکیشن پته</div>
       <div class="logo-container">
-        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="./icons/pateh.svg"
+        <embed height="auto%" pluginspage="http://www.adobe.com/svg/viewer/install/" src="icons/pateh.svg"
           style="width: 30% " type="image/svg+xml" />
         <div class="instruction_text" style="text-align:start">
           <p>۱- در نوار پایین گوشی دکمه <span style="font-size: 48px;">&#x2191;</span> را کلیک
@@ -208,7 +208,6 @@
       )) // true
 
 
-
       showPlatformSpecificMessages(isIos, isSafari, isAndroid, isPwaInstalled);
     });
 
@@ -216,40 +215,42 @@
       //add loading screen
       document.getElementById('splash-screen').style.display = 'block';
 
-      if (isIos && isSafari) {
-        if (isPwaInstalled) {
-          // Download main.dart.js
-          _flutter.loader.loadEntrypoint({
-            serviceWorker: {
-              serviceWorkerVersion: serviceWorkerVersion,
-            },
-            onEntrypointLoaded: function (engineInitializer) {
-              engineInitializer.initializeEngine().then(function (appRunner) {
-                appRunner.runApp();
-              });
+      setTimeout(() => {
+        if (isIos && isSafari) {
+          if (isPwaInstalled) {
+            // Download main.dart.js
+            _flutter.loader.loadEntrypoint({
+              serviceWorker: {
+                serviceWorkerVersion: serviceWorkerVersion,
+              },
+              onEntrypointLoaded: function (engineInitializer) {
+                engineInitializer.initializeEngine().then(function (appRunner) {
+                  appRunner.runApp();
+                });
 
-              // Remove splash
-              document.getElementById('splash-screen').style.display = 'none';
-            }
-          });
+                // Remove splash
+                document.getElementById('splash-screen').style.display = 'none';
+              }
+            });
+          } else {
+            // Remove splash
+            document.getElementById('splash-screen').style.display = 'none';
+            document.getElementById('supported-safari-message').style.display = 'block';
+          }
+        } else if (isIos && !isSafari) {
+          // Remove splash
+          document.getElementById('splash-screen').style.display = 'none';
+          document.getElementById('unsupported-non-safari-message').style.display = 'block';
+        } else if (isAndroid) {
+          // Remove splash
+          document.getElementById('splash-screen').style.display = 'none';
+          document.getElementById('unsupported-android-message').style.display = 'block';
         } else {
           // Remove splash
           document.getElementById('splash-screen').style.display = 'none';
-          document.getElementById('supported-safari-message').style.display = 'block';
+          document.getElementById('unsupported-desktop-message').style.display = 'block';
         }
-      } else if (isIos && !isSafari) {
-        // Remove splash
-        document.getElementById('splash-screen').style.display = 'none';
-        document.getElementById('unsupported-non-safari-message').style.display = 'block';
-      } else if (isAndroid) {
-        // Remove splash
-        document.getElementById('splash-screen').style.display = 'none';
-        document.getElementById('unsupported-android-message').style.display = 'block';
-      } else {
-        // Remove splash
-        document.getElementById('splash-screen').style.display = 'none';
-        document.getElementById('unsupported-desktop-message').style.display = 'block';
-      }
+      }, 1000)
     }
   </script>
 </body>
